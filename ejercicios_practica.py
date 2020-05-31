@@ -70,6 +70,7 @@ def ej2():
     Se debe debe imprimir un cartel de error si el operador ingresado no es
     alguno de lo soportados o no es la palabra "FIN"
     '''
+    
     numero_1 = 33
     numero_2 = 47
     suma = numero_1 + numero_2
@@ -80,6 +81,9 @@ def ej2():
     condicion = True
     
     while condicion:
+        # Inove: Como alternativa adicional, se podría solicitar el ingreso de los
+        # numemeros numero_1 y numero_2 en cada iteracion de while para realizar
+        # nuevos cálculos
         operador = str(input("Ingrese el simbolo de la operacion que desea ejecutar:\n"))
         
         if operador == "FIN":
@@ -102,6 +106,20 @@ def ej2():
 
         elif operador != "+" and "-" and "**" and "+" and "/":
             print("error")
+            
+       # Inove: La setencia elif operador != "+" and "-" and "**" and "+" and "/": no falla dado el contexto,
+       # pero en realidad no está chequeando todas las condiciones, solo la primera, dado que para cada
+       # sentencia condicional se debe agregar el o los "sujetos", a que me refiero:
+       # elif operador != "+" and operador != "-" and operador != "**" and operador != "+" and operador != "/":
+       # Ahora si se estaría evaluando en todos los casos contra "operador", se podría agregar "()" para mejorar
+       # la interpretración a primera vista:
+       # elif (operador != "+") and (operador != "-") and (operador != "**") and (operador != "+") and (operador != "/"):
+       # ¿Por qué como estaba antes igual no fallaba? A pesar de no estar evaluando el operador contra todos los símbolos?
+       # Esto es por los "elif" anidadso, en todos los "elif" anterior se fue evaluando contra todos los operadores
+       # aceptados, por lo que al llegar al final, si se llega hasta ese "elif", es porque ya sabemos que el operador
+       # no es válido. Conclusión podría directamente haberse reemplazado el último "elif" por:
+       # else:
+       #     print("Error, el operador ingresado {} es incorrecto!".format(operador))
 
 def ej3():
     print("Mi organizador académico (#_#)")
@@ -211,8 +229,8 @@ def ej4():
             temperatura_min = temperatura
 
         temperatura_sumatoria += temperatura
-        temperatura_len = len(temp_dataloger)
-        temperatura_promedio = temperatura_sumatoria / temperatura_len
+        temperatura_len = len(temp_dataloger)   # Inove: Este cálculo podría ejecutarse una única vez fuera del bucle
+        temperatura_promedio = temperatura_sumatoria / temperatura_len # Inove: Este cálculo podría ejecutarse una única vez fuera del bucle
 
     
         
@@ -301,6 +319,13 @@ def ej5():
 
             if accion == 1 or 2:
 
+                # Inove: Esta perfecto el procedimiento de solicitar 3 palabras
+                # como alternativa (para automatizarlo) se podría utilizar un bucle para ello:
+                # palabras_deseadas = 3
+                # for i in range(palabras_deseadas):
+                #     palabra = str(input("Ingrese la palabra", i, ":\n"))
+                #     lista_palabras.append(palabra)
+                
                 palabra_1 = str(input("Ingrese la primera palabra:\n"))
                 lista_palabras.append(palabra_1)
                 
@@ -316,8 +341,13 @@ def ej5():
                             palabra_oa = palabra
                     print(lista_palabras)
                     print("Palabra mas grande alfaneticamente: ",palabra_oa)
-                    lista_palabras = []
-
+                    lista_palabras = []    
+                    # Inove: Excelente! Muy bien el detalle de vaciar la lista!
+                    # Como notar de color está perfecto utilizar lista_palabras = []
+                    # Hay un método de "lista" que hace justamente este trabajo, y es "clear()"
+                    # lista_palabras.clear()
+                    # Lo dejo como nota de color ya que a la "vista" se entiende de primera
+                    # que la intención fue vaciar la lista.
                     
 
                 elif accion == 2:
